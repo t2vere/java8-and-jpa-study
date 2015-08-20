@@ -35,7 +35,7 @@ public class JpaMain {
 		String id = "id1";
 		Member member = new Member();
 		member.setId(id);
-		member.setUsername("Ã¶¼ö");
+		member.setUsername("ì² ìˆ˜");
 		member.setAge(34);
 
 		em.persist(member);

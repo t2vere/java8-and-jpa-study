@@ -10,8 +10,8 @@ public class ExamMergeMain {
 	private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpabook");
 	
 	public static void main(String[] args) {
-		Member member = createMember("memberA","È¸¿ø1", 30);
-		member.setUsername("º¯°æ1");
+		Member member = createMember("memberA","íšŒì›1", 30);
+		member.setUsername("ìƒˆë¡œìš´ ì´ë¦„ì˜ íšŒì›1");
 		mergeMember(member);
 	}
 
