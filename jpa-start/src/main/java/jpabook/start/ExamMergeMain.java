@@ -1,5 +1,7 @@
 package jpabook.start;
 
+import java.util.UUID;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -7,10 +9,11 @@ import javax.persistence.Persistence;
 
 public class ExamMergeMain {
 
-	private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpabook");
-	
+	private static EntityManagerFactory emf = Persistence
+			.createEntityManagerFactory("jpabook");
+
 	public static void main(String[] args) {
-		Member member = createMember("memberA","회원1", 30);
+		Member member = createMember("member_" + UUID.randomUUID(), "회원1", 30);
 		member.setUsername("새로운 이름의 회원1");
 		mergeMember(member);
 	}
@@ -21,30 +24,30 @@ public class ExamMergeMain {
 		tx.begin();
 		Member mergeMember = em.merge(member);
 		tx.commit();
-		
+
 		System.out.println(member);
 		System.out.println(mergeMember);
 		System.out.println(em.contains(member));
 		System.out.println(em.contains(mergeMember));
-		
+
 		em.close();
 	}
 
 	private static Member createMember(String id, String name, Integer age) {
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
-		
+
 		tx.begin();
-		
+
 		Member member = new Member();
 		member.setId(id);
 		member.setUsername(name);
 		member.setAge(age);
 		em.persist(member);
-		
+
 		tx.commit();
 		em.close();
-		
+
 		return member;
 	}
 }
