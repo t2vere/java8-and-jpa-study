@@ -5,7 +5,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-public class TestDrive {
+public class TestEntityMapping {
 
 	public static void main(String[] args) {
 
@@ -29,19 +29,13 @@ public class TestDrive {
 	}
 
 	private static void logic(EntityManager em) {
-		for (int i = 0; i < 100; i++) {
-			DashUser user = new DashUser();
-			// user.setId("id1");
-			user.setUsername("hyeon_" + i);
-			user.setAge(i + 23);
-			if (i % 10 == 0) {
-				user.setRoleType(RoleType.ADMIN);
-			} else {
-				 user.setRoleType(RoleType.USER);
-			}
-			em.persist(user);
-			
-			System.out.println("user-id=" + user.getId());
-		}
+		Team team = new Team();
+		team.setName("team-x2");
+		em.persist(team);
+		
+		DashUser user = new DashUser();
+		user.setUsername("username");
+		user.setTeam(team);
+		em.persist(user);
 	}
 }
