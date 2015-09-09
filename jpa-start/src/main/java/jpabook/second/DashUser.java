@@ -74,7 +74,7 @@ public class DashUser {
 	private String description;
 	
 	//연관관계 매핑
-	@ManyToOne
+	@ManyToOne // optional, fetch, cascade, targetEntity(연관 엔티티의 타입 정보, 제네릭으로 대체 가능)
 	@JoinColumn(name="TEAM_ID")
 	private Team team;
 
