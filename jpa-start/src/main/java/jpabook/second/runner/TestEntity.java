@@ -1,11 +1,14 @@
-package jpabook.second;
+package jpabook.second.runner;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-public class TestEntityMapping {
+import jpabook.second.DashUser;
+import jpabook.second.RoleType;
+
+public class TestEntity {
 
 	public static void main(String[] args) {
 
@@ -29,13 +32,19 @@ public class TestEntityMapping {
 	}
 
 	private static void logic(EntityManager em) {
-		Team team = new Team();
-		team.setName("team-x2");
-		em.persist(team);
-		
-		DashUser user = new DashUser();
-		user.setUsername("username");
-		user.setTeam(team);
-		em.persist(user);
+		for (int i = 0; i < 100; i++) {
+			DashUser user = new DashUser();
+			// user.setId("id1");
+			user.setUsername("hyeon_" + i);
+			user.setAge(i + 23);
+			if (i % 10 == 0) {
+				user.setRoleType(RoleType.ADMIN);
+			} else {
+				 user.setRoleType(RoleType.USER);
+			}
+			em.persist(user);
+			
+			System.out.println("user-id=" + user.getId());
+		}
 	}
 }
