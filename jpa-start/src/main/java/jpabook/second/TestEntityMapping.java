@@ -14,7 +14,7 @@ public class TestEntityMapping {
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 
-		try {
+		try { 
 			tx.begin();
 			logic(em);
 			tx.commit();
