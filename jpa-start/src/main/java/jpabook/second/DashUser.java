@@ -82,8 +82,19 @@ public class DashUser {
 		return team;
 	}
 
+	/**
+	 * 무한루프 주의 (DashUser와 Team 객체의 상호참조)
+	 * @param team
+	 */
 	public void setTeam(Team team) {
+		// 기존 관계 제거
+		if (this.team != null) {
+			this.team.getDashUsers().remove(this);
+		}
+		
 		this.team = team;
+		// 연관관계 편의 제공
+		team.getDashUsers().add(this);
 	}
 
 	public DashUser() {

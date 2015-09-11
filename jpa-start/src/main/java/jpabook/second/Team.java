@@ -21,7 +21,8 @@ public class Team {
 	private Integer id;
 	private String name;
 	
-	@OneToMany(mappedBy="team")
+	@OneToMany(mappedBy="team") // 양방향 연관관계시 주인이 아닌쪽에만 설정
+	// 연관관계의 주인이란 외래키 관리자의 의미 (예제에서는 DashUser 엔티티)
 	private List<DashUser> dashUsers = new ArrayList<DashUser>();
 	
 	public Team() {

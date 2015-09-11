@@ -83,7 +83,7 @@ public class TestEntityMapping {
 
 		DashUser storedUser = em.find(DashUser.class, 1);
 		System.out.println("find.user=" + storedUser.getTeam().getName());
-		storedUser.getTeam().getDashUsers().add(storedUser);
+		//storedUser.getTeam().getDashUsers().add(storedUser); //user entitiy에서 편의메소드 제공시 호출할 필요 없음
 		System.out.println("find.user=" + storedUser.getTeam().getDashUsers());
 	}
 }
