@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class JobGrandChildId implements Serializable {
 
-	private JobChild child;
+	private JobChildId child;
 	private String id;
 	
 	public JobGrandChildId() {
