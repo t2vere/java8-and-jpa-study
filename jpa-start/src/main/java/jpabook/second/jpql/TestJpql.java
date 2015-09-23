@@ -27,6 +27,8 @@ public class TestJpql {
 			logicJpqlConditionalExpression(em);
 			logicJpqlPolymorphism(em);
 			logicJpqlUserDefinedFunction(em);
+			logicJpqlUsingEntity(em);
+			logicJpqlNamedQuery(em);
 			tx.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -36,6 +38,52 @@ public class TestJpql {
 		}
 		emf.close();
 
+	}
+
+	private static void logicJpqlNamedQuery(EntityManager em) {
+		// 동적 쿼리
+		// -jpql을 문자열로 완성해서 직접 넘기는 방식
+		// -런타임에 dynamic jpql 구성 가능
+		
+		// 정적 쿼리=Named Query -> entity에 생성
+		// -미리 정의한 쿼리에 이름 부여, 하번 정의하면 변경 불가
+		// -app 로딩 시점에 jpql 문법 체크 미리 파싱
+		// -오류 빨리 확인 가능, 파싱된 결과 재사용으로 성능상 이점
+		// -정적 sql 생성되므로 db조회 성능 최적화 가능
+		// 영속성 유닛 단위로 관리됨, 유일한 쿼리식별자 필요
+		
+		// xml 구성 가능 -> persistence.xml에 등록 -> 쿼리 동일한 경우 xml에 우선
+		
+		List<Member> list = em.createNamedQuery("Member10.findByUsername", Member.class)
+				.setParameter("username", "kim")
+				.getResultList();
+		
+		System.out.println("named query result size: " + list.size());
+		
+		List<Member> list2 = em.createNamedQuery("Member10.findByUsername2", Member.class)
+				.setParameter("username", "kim")
+				.getResultList();
+		
+		System.out.println("named query in XML, result size: " + list2.size());
+	}
+
+	private static void logicJpqlUsingEntity(EntityManager em) {
+		// 엔티티 객체를 직접 사용하면 sql에서는 pk값 사용
+		Member member = em.find(Member.class,2L);
+		List<Member> list = em.createQuery("select m From Member10 m where m = :member", Member.class)
+				.setParameter("member", member)
+				.getResultList();
+		// sql: select m.* from member m where m.id = ? 로 변환됨
+		
+		System.out.println(member);
+		
+		Team team = em.find(Team.class, 1L);
+		// team entity, team.id까지는 묵시적 조인이 일어나지 않음 ( team.name 사용시 조인 발생)
+		List<Member> list2 = em.createQuery("select m from Member10 m where m.team = :team", Member.class)
+				.setParameter("team", team)
+				.getResultList();
+		System.out.println("memer list in Team 1");
+		System.out.println(list2);
 	}
 
 	private static void logicJpqlUserDefinedFunction(EntityManager em) {
