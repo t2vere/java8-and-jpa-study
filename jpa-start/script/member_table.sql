@@ -1,3 +1,5 @@
+
+/**test**/
 create table MEMBER (
 ID VARCHAR(255)
 ,NAME VARCHAR(255)
