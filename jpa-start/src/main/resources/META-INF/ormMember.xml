@@ -8,4 +8,23 @@
 			]]>
 		</query>
 	</named-query>
+	
+	<named-native-query name="Member.memberWithOrderCountXml"
+		result-set-mapping="memberWithOrderCountResultMap">
+		<query><![CDATA[
+			SELECT M.ID, AGE, NAME, TEAM_ID, I.ORDER_COUNT
+			FROM MEMBER M
+			LEFT JOIN
+				(SELECT IM.ID, COUNT(*) AS ORDER_COUNT
+				FROM ORDERS O, MEMBER IM
+				WHERE O.MEMBER_ID = IM.ID) I
+			ON M.ID = I.ID
+		]]></query>
+	</named-native-query>
+	
+	<!-- XML에 정의할 떄는 순서를 지켜야 함 (named-native-quer 먼저 정의 후 sql-result-set-mapping 정의) -->
+	<set-result-set-mapping name="memberWithOrderCountResultMap">
+		<entity-result entity-class="jpabook.second.jpql.Member" />
+		<column-result name="ORDER_COUNT" />
+	</set-result-set-mapping>
 </entity-mappings>
