@@ -5,6 +5,7 @@
     
     	<!-- Named Query XML, orm.xml은 자동 로딩 -->
         <mapping-file>META-INF/ormMember.xml</mapping-file>
+        <class>jpabook.second.jpql.Order</class>
 
         <properties>
 
