@@ -16,10 +16,10 @@ public class Parent {
 	@GeneratedValue
 	private Long id;
 
-	//jpa¿¡¼­ ¿£Æ¼Æ¼¸¦ ÀúÀåÇÒ ¶§ ¿¬°üµÈ ¸ðµç ¿£Æ¼Æ¼´Â ¿µ¼Ó»óÅÂ¿©¾ß ÇÑ´Ù.
-	//¿¬°ü°ü°è ¸ÅÇÎ°ú´Â °ü·Ã¾ø°í ¿µ¼ÓÈ­ÇÒ ¶§ ´ÜÁö ¿¬°üµÈ ¿£Æ¼Æ¼µµ ÇÔ²² ¿µ¼ÓÈ­ÇÏ´Â ÆíÀÇ Á¦°ø : persist, remove, ...
-	//cascade=¿µ¼Ó¼º ÀüÀÌ È°¼ºÈ­, remove´Â fulshÈ£ÃâµÉ¶§ ÀüÀÌ ¹ß»ý
-	//orphanRemoval=ºÎ¸ð ¿£Æ¼Æ¼ ÄÃ·º¼Ç¿¡¼­ ÀÚ½Ä ¿£Æ¼Æ¼ ÂüÁ¶ Á¦°Å½Ã ÀÚ½Ä ¿£Æ¼Æ¼ ÀÚµ¿À¸·Î »èÁ¦, OTO, OTM¿¡¼­¸¸ »ç¿ë °¡´É
+	//jpaì—ì„œ ì—”í‹°í‹°ë¥¼ ì €ìž¥í•  ë•Œ ì—°ê´€ëœ ëª¨ë“  ì—”í‹°í‹°ëŠ” ì˜ì†ìƒíƒœì—¬ì•¼ í•œë‹¤.
+	//ì—°ê´€ê´€ê³„ ë§¤í•‘ê³¼ëŠ” ê´€ë ¨ì—†ê³  ì˜ì†í™”í•  ë•Œ ë‹¨ì§€ ì—°ê´€ëœ ì—”í‹°í‹°ë„ í•¨ê»˜ ì˜ì†í™”í•˜ëŠ” íŽ¸ì˜ ì œê³µ : persist, remove, ...
+	//cascade=ì˜ì†ì„± ì „ì´ í™œì„±í™”, removeëŠ” fulshí˜¸ì¶œë ë•Œ ì „ì´ ë°œìƒ
+	//orphanRemoval=ë¶€ëª¨ ì—”í‹°í‹° ì»¬ë ‰ì…˜ì—ì„œ ìžì‹ ì—”í‹°í‹° ì°¸ì¡° ì œê±°ì‹œ ìžì‹ ì—”í‹°í‹° ìžë™ìœ¼ë¡œ ì‚­ì œ, OTO, OTMì—ì„œë§Œ ì‚¬ìš© ê°€ëŠ¥
 	@OneToMany(mappedBy = "parent", cascade= {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval=true) 
 	private List<Child> children = new ArrayList<>();
 
